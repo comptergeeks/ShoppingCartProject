@@ -14,7 +14,7 @@ public class MyFrame extends JFrame implements ActionListener {
     ImageIcon appleImage = new ImageIcon(new ImageIcon("/Users/farhankhan/IdeaProjects/ShoppingCart/src/com/company/assets/apple.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
 
     public void setScreen(){
-        frame.setSize(500, 500);
+        frame.setSize(800, 800);
         frame.setResizable(true);
         mainPanel.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +27,10 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         scrollPane.setPreferredSize(new Dimension(500, 500));
         holder.setPreferredSize(new Dimension(500, 1000));
+        cartTab.setSize(500, 100);
+        cartTab.setBackground(Color.darkGray);
         mainPanel.add(scrollPane);
+        mainPanel.add(cartTab, BorderLayout.NORTH);
         frame.setVisible(true);
     }
 
