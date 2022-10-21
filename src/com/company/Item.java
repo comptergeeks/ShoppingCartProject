@@ -8,14 +8,12 @@ import java.util.jar.JarEntry;
 
 public class Item extends JPanel implements ActionListener {
     ImageIcon image;
-    String desc;
     JPanel container;
     JFrame frame;
     int count;
     JLabel quantity = new JLabel(String.valueOf(count));
-    Item(ImageIcon passImage, String passDesc, JPanel holder, JFrame passFrame) {
+    Item(ImageIcon passImage, JPanel holder, JFrame passFrame) {
         image = passImage;
-        desc = passDesc;
         container = holder;
         frame = passFrame;
         createPanel();
