@@ -117,6 +117,7 @@ public class MyFrame extends JFrame implements ActionListener {
             }
         }
         openCart(itemStack, newPanel, frame2);
+
     }
 
     public void openCart(Stack<Item> itemStack, JPanel newPanel, JFrame frame2) {
