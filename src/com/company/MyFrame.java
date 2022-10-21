@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 public class MyFrame extends JFrame implements ActionListener {
-    JFrame frame = new JFrame("My Grocery Store");
+    JFrame frame = new JFrame("My Fruit Store");
     JPanel mainPanel = new JPanel();
     JPanel holder = new JPanel();
     JPanel cartTab = new JPanel();
-    JScrollPane scrollPane = new JScrollPane(holder,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    JScrollPane scrollPane = new JScrollPane(holder, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     ImageIcon appleImage = new ImageIcon(new ImageIcon("/Users/farhankhan/IdeaProjects/ShoppingCart/src/com/company/assets/apple.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
     ImageIcon greenappleImage = new ImageIcon(new ImageIcon("/Users/farhankhan/IdeaProjects/ShoppingCart/src/com/company/assets/greenapple.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
     ImageIcon orangeImage = new ImageIcon(new ImageIcon("/Users/farhankhan/IdeaProjects/ShoppingCart/src/com/company/assets/orange.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
@@ -30,20 +30,7 @@ public class MyFrame extends JFrame implements ActionListener {
     ArrayList<Item> list = new ArrayList<>();
     ArrayList<ImageIcon> listOfImages = new ArrayList<>();
 
-    public void setScreen(){
-        listOfImages.add(appleImage);
-        listOfImages.add(greenappleImage);
-        listOfImages.add(orangeImage);
-        listOfImages.add(blueberryImage);
-        listOfImages.add(raspberryImage);
-        listOfImages.add(strawberryImage);
-        listOfImages.add(grapeImage);
-        listOfImages.add(lemonImage);
-        listOfImages.add(limeImage);
-        listOfImages.add(watermelonImage);
-        listOfImages.add(pearImage);
-        listOfImages.add(peachesImage);
-        listOfImages.add(bannanaImage);
+    public void setScreen() {
         setProducts();
         frame.setSize(800, 800);
         frame.setResizable(true);
@@ -63,7 +50,7 @@ public class MyFrame extends JFrame implements ActionListener {
         cartTab.setLayout(new BorderLayout());
         cart.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         cart.addActionListener(this);
-        JLabel label = new JLabel("My Grocery Store");
+        JLabel label = new JLabel("My Fruit Store");
         cartTab.add(label, BorderLayout.CENTER);
         cartTab.add(cart, BorderLayout.EAST);
         mainPanel.add(scrollPane);
@@ -72,21 +59,84 @@ public class MyFrame extends JFrame implements ActionListener {
     }
 
     public void setProducts() {
+        listOfImages.add(appleImage);
+        listOfImages.add(greenappleImage);
+        listOfImages.add(orangeImage);
+        listOfImages.add(blueberryImage);
+        listOfImages.add(raspberryImage);
+        listOfImages.add(strawberryImage);
+        listOfImages.add(grapeImage);
+        listOfImages.add(lemonImage);
+        listOfImages.add(limeImage);
+        listOfImages.add(watermelonImage);
+        listOfImages.add(pearImage);
+        listOfImages.add(peachesImage);
+        listOfImages.add(bannanaImage);
+        boolean isCart = false;
+        appleImage.setDescription("Red Apples");
+        greenappleImage.setDescription("Green Apples");
+        orangeImage.setDescription("Oranges");
+        blueberryImage.setDescription("Bluberries");
+        raspberryImage.setDescription("Raspberries");
+        grapeImage.setDescription("Grapes");
+        strawberryImage.setDescription("Strawberry");
+        lemonImage.setDescription("Lemons");
+        limeImage.setDescription("Limes");
+        watermelonImage.setDescription("Watermelons");
+        pearImage.setDescription("Pears");
+        peachesImage.setDescription("Peaches");
+        bannanaImage.setDescription("Bananas");
+
         if (listOfImages.size() > 0) {
             for (int i = 0; i < listOfImages.size(); i++) {
-                list.add(new Item(listOfImages.get(i), holder, frame));
+                list.add(new Item(listOfImages.get(i), holder, frame, isCart));
             }
         }
     }
-    public void checkCart() {
 
+    public void checkCart() {
+        boolean isCart = true;
+        JFrame frame2 = new JFrame("Cart");
+        frame2.setSize(500, 500);
+        frame2.setResizable(true);
+        JPanel panel = new JPanel();
+        frame2.setContentPane(panel);
+        panel.setBackground(Color.darkGray);
+        JPanel newPanel = new JPanel();
+        JScrollPane scrollPane2 = new JScrollPane(newPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane2.setPreferredSize(new Dimension(500, 500));
+        newPanel.setLayout(new BoxLayout(newPanel, BoxLayout.Y_AXIS));
+        panel.add(scrollPane2);
+        frame2.setVisible(true);
+        Stack<Item> itemStack = new Stack<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).count > 0) {
+                for (int j = 0; j < list.get(i).count; j++) {
+                    itemStack.add(new Item(list.get(i).image, newPanel, frame2, isCart));
+                }
+            }
+        }
+        openCart(itemStack, newPanel, frame2);
+    }
+
+    public void openCart(Stack<Item> itemStack, JPanel newPanel, JFrame frame2) {
+        System.out.println(itemStack.size());
+        if (itemStack.size() > 0) {
+            while (!itemStack.isEmpty()) {
+                newPanel.add(itemStack.pop().createCart());
+                frame2.pack();
+                repaint();
+            }
+        } else {
+            JOptionPane.showMessageDialog(frame2, "You have no items. Add some into your cart and try again!", "Empty Cart", JOptionPane.WARNING_MESSAGE);
+            frame2.dispose();
+        }
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cart) {
-            System.out.println("pressed");
             checkCart();
         }
 

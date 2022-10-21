@@ -12,11 +12,15 @@ public class Item extends JPanel implements ActionListener {
     JFrame frame;
     int count;
     JLabel quantity = new JLabel(String.valueOf(count));
-    Item(ImageIcon passImage, JPanel holder, JFrame passFrame) {
+    Item(ImageIcon passImage, JPanel holder, JFrame passFrame, Boolean isCart) {
         image = passImage;
         container = holder;
         frame = passFrame;
-        createPanel();
+        if(!isCart) {
+            createPanel();
+        } else {
+            createCart();
+        }
     }
     public void createPanel() {
         JPanel panel = new JPanel();
@@ -36,6 +40,22 @@ public class Item extends JPanel implements ActionListener {
         buttonHolder.setOpaque(false);
         panel.add(buttonHolder, BorderLayout.EAST);
         container.add(panel);
+    }
+    public JPanel createCart() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(new JLabel(image), BorderLayout.WEST);
+        panel.setBackground(Color.LIGHT_GRAY);
+        JPanel informationHolder = new JPanel();
+        GridLayout infoLayout = new GridLayout(0,1);
+        informationHolder.setLayout(infoLayout);
+        JLabel title = new JLabel(image.getDescription());
+        informationHolder.setOpaque(false);
+        //System.out.println();
+        informationHolder.add(title);
+        panel.add(informationHolder, BorderLayout.EAST);
+        return panel;
+
     }
     public void incrementCounter() {
         count++;
