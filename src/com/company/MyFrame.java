@@ -4,10 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 public class MyFrame extends JFrame implements ActionListener {
     JFrame frame = new JFrame("My Grocery Store");
@@ -58,7 +55,6 @@ public class MyFrame extends JFrame implements ActionListener {
         System.out.println(list.size());
         for (int i = 0; i < list.size(); i++) {
             holder.add(list.get(i));
-            System.out.println(list.size());
         }
         //holder.add(new Item(appleImage, holder, frame));
         scrollPane.setPreferredSize(new Dimension(500, 500));
@@ -76,11 +72,13 @@ public class MyFrame extends JFrame implements ActionListener {
     }
 
     public void setProducts() {
-        if (listOfImages.size() > 0 ) {
+        if (listOfImages.size() > 0) {
             for (int i = 0; i < listOfImages.size(); i++) {
                 list.add(new Item(listOfImages.get(i), holder, frame));
             }
         }
+    }
+    public void checkCart() {
 
     }
 
@@ -89,6 +87,7 @@ public class MyFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cart) {
             System.out.println("pressed");
+            checkCart();
         }
 
     }
