@@ -41,7 +41,9 @@ public class Item extends JPanel implements ActionListener {
         panel.add(buttonHolder, BorderLayout.EAST);
         container.add(panel);
     }
+    
     public JPanel createCart() {
+
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.add(new JLabel(image), BorderLayout.WEST);
@@ -57,6 +59,7 @@ public class Item extends JPanel implements ActionListener {
         return panel;
 
     }
+
     public void incrementCounter() {
         count++;
         frame.setMinimumSize(frame.getSize());

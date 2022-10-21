@@ -31,6 +31,7 @@ public class MyFrame extends JFrame implements ActionListener {
     ArrayList<ImageIcon> listOfImages = new ArrayList<>();
 
     public void setScreen() {
+
         setProducts();
         frame.setSize(800, 800);
         frame.setResizable(true);
@@ -80,6 +81,7 @@ public class MyFrame extends JFrame implements ActionListener {
         raspberryImage.setDescription("Raspberries");
         grapeImage.setDescription("Grapes");
         strawberryImage.setDescription("Strawberry");
+
         lemonImage.setDescription("Lemons");
         limeImage.setDescription("Limes");
         watermelonImage.setDescription("Watermelons");
@@ -116,8 +118,16 @@ public class MyFrame extends JFrame implements ActionListener {
                 }
             }
         }
-        openCart(itemStack, newPanel, frame2);
 
+        openCart(itemStack, newPanel, frame2);
+}
+
+
+    public void openCart(Stack<Item> itemStack, JPanel newPanel) {
+        System.out.println(itemStack.size());
+        for (int i = 0; i < itemStack.size(); i++) {
+            newPanel.add(itemStack.pop());
+        }
     }
 
     public void openCart(Stack<Item> itemStack, JPanel newPanel, JFrame frame2) {
